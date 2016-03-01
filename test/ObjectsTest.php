@@ -162,10 +162,7 @@ class UnderscoreObjectsTest extends PHPUnit_Framework_TestCase {
     $clone_obj->name = 'curly';
     $this->assertTrue($clone_obj->name === 'curly' && $moe_obj->name === 'moe', 'clones can change shallow attributes without affecting the original');
 
-    $clone['lucky'][] = 101;
-    $this->assertEquals(101, __::last($moe['lucky']), 'changes to deep attributes are shared with the original');
-
-    $clone_obj->lucky[] = 101;
+    $clone_obj->lucky[3] = 101;
     $this->assertEquals(101, __::last($moe_obj->lucky), 'changes to deep attributes are shared with the original');
 
     $val = 1;

@@ -18,6 +18,10 @@ function __($item=null) {
 class __ {
   public static function __callStatic($name, $arguments) {
     $inst = Underscore::getInstance();
+    if ($name === 'clon') {
+      $obj =& $arguments[0];
+      return $inst->clon($obj);
+    }
     return call_user_func_array([$inst, $name], $arguments);
   }
 }
@@ -402,10 +406,11 @@ class Underscore {
   public function union($array=null) {
     $arrays = self::_wrapArgs(func_get_args(), 1);
 
-    if(count($arrays) === 1) return self::_wrap($array);
+    if (count($arrays) === 1) return self::_wrap($array);
 
-    $__ = new self;
-    return self::_wrap($__->flatten(array_values(array_unique(call_user_func_array('array_merge', $arrays)))));
+    $inst = self::getInstance();
+    $val =  $inst->flatten(call_user_func_array('array_merge_recursive', $arrays));
+    return self::_wrap(array_values(array_unique($val)));
   }
 
 

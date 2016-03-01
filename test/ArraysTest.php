@@ -8,7 +8,7 @@ class UnderscoreArraysTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array(), __::first(array(1,2,3), 0), 'can pass an index to first');
     $this->assertEquals(array(1, 2), __::first(array(1,2,3), 2), 'can pass an index to first');
     $this->assertEquals(1, __(array(1,2,3))->first(), 'can perform OO-style "first()"');
-    
+
     $result = __::map(array(array(1,2,3), array(1,2,3)), function($vals) {
       return __::first($vals);
     });
@@ -147,7 +147,7 @@ class UnderscoreArraysTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array(1=>2,4=>3,6=>4), $result, 'works on an arguments object');
 
     $result = __::union(array(1, 2, 3), array(2, 30, 1), array(1, 40, array(1)));
-    $this->assertEquals('1 2 3 30 40 1', join(' ', $result), 'takes the union of a list of nested arrays');
+    $this->assertEquals('1 2 3 30 40', join(' ', $result), 'takes the union of a list of nested arrays');
 
     // extra
     $this->assertEquals(array(4,5,6), __(array(4,5,6,7,8))->without(7,8), 'works in OO-style calls');
