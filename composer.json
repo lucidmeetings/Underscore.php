@@ -1,22 +1,23 @@
 {
-		"name": "dperrymorrow/underscore.php",
-		"description": "a patch of http://brianhaveri.github.com/Underscore.php to make it work with PHP 5.5 in strict mode",
-		"license": "MIT",
-		"authors": [
-			{
-				"name": "David Morrow",
-				"email": "dperrymorrow@gmail.com"
-			}
-		],
-		"require": {
-			"php": ">=5.5.0"
-		},
-		"require-dev": {
-			"phpunit/phpunit": "4.0.*"
-		},
-		"autoload": {
-			"files": [
-				"underscore.php"
-			]
+	"version": "1.0.0",
+	"name": "dperrymorrow/underscore.php",
+	"description": "a patch of http://brianhaveri.github.com/Underscore.php to make it work with PHP 5.5 in strict mode",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "David Morrow",
+			"email": "dperrymorrow@gmail.com"
 		}
+	],
+	"require": {
+		"php": ">=5.5.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "4.0.*"
+	},
+	"autoload": {
+		"files": [
+			"underscore.php"
+		]
+	}
 }
