@@ -572,7 +572,11 @@ $fibonacci = function($n) use (&$fibonacci) {
 $fastFibonacci = __::memoize($fibonacci);
 ```
 
-### throttle `__::throttle(function, wait)`
+### throttle
+
+```php
+__::throttle(function, wait)
+```
 
 Throttles a function so that it can only be called once every **wait** milliseconds.
 
@@ -581,7 +585,11 @@ $func = function() { return 'x'; }
 __::throttle($func);
 ```
 
-## once `__::once(function)`
+## once
+
+```php
+__::once(function)
+```
 
 Creates a version of the function that can only be called once.
 
@@ -594,7 +602,11 @@ echo $num;
 // 1
 ```
 
-## after `__::after(count, function)`
+## after
+
+```php
+__::after(count, function)
+```
 
 Creates a version of the function that will only run after being called **count** times.
 
