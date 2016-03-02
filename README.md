@@ -55,8 +55,12 @@ __::each([1, 2, 3], function($num, $index) use ($multiplier) {
 // 0=2,1=4,2=6,
 ```
 
-###map
-`__::map(collection, iterator)` _Alias: [collect](#collect)_
+### map
+_Alias: [collect](#collect)_
+
+```php
+__::map(collection, iterator)
+```
 
 Returns an array of values by mapping each in collection through the iterator. Arguments passed to iterator are (value, key, collection). Unlike Underscore.js, context is passed using PHP's `use` statement.
 
@@ -69,17 +73,26 @@ __::map(['one'=>1, 'two'=>2, 'three'=>3], function($num, $key) {
 // [3, 6, 9];
 ```
 
-###reduce
-`__::reduce(collection, iterator, memo)` _Aliases: [inject](#inject), [foldl](#foldl)_
+### reduce
+ _Aliases: [inject](#inject), [foldl](#foldl)_
+
+```php
+__::reduce(collection, iterator, memo)
+```
 
 Reduce the collection into a single value. Memo is the initial state of the reduction, updated by the return value of the iterator. Unlike Underscore.js, context is passed using PHP's `use` statement.
 
 ```php
-__::reduce([1, 2, 3], function($memo, $num) { return $memo + $num; }, 0); // 6
+__::reduce([1, 2, 3], function($memo, $num) { return $memo + $num; }, 0);
+// 6
 ```
 
-###reduceRight
-`__::reduceRight(collection, iterator, memo)` _Alias: [foldl](#foldr)_
+### reduceRight
+_Alias: [foldl](#foldr)_
+
+```php
+__::reduceRight(collection, iterator, memo)
+```
 
 Right-associative version of reduce.
 
@@ -89,8 +102,12 @@ $flat = __::reduceRight($list, function($a, $b) { return array_merge($a, $b); },
 // [4, 5, 2, 3, 0, 1]
 ```
 
-###find
-`__::find(collection, iterator)` _Alias: [detect](#detect)_
+### find
+_Alias: [detect](#detect)_
+
+```php
+__::find(collection, iterator)
+```
 
 Return the value of the first item in the collection that passes the truth test (**iterator**).
 
@@ -99,8 +116,12 @@ __::find([1, 2, 3, 4], function($num) { return $num % 2 === 0; });
 // 2
 ```
 
-###filter
-`__::filter(collection, iterator)` _Alias: [select](#select)_
+### filter
+_Alias: [select](#select)_
+
+```php
+__::filter(collection, iterator)
+```
 
 Return the values in the collection that pass the truth test (**iterator**).
 
@@ -109,8 +130,10 @@ __::filter([1, 2, 3, 4], function($num) { return $num % 2 === 0; });
 // [2, 4]
 ```
 
-###reject
-`__::reject(collection, iterator)`
+### reject
+```php
+__::reject(collection, iterator)
+```
 
 Return an array where the items failing the truth test (**iterator**) are removed.
 
@@ -119,8 +142,11 @@ __::reject([1, 2, 3, 4], function($num) { return $num % 2 === 0; });
 // [1, 3]
 ```
 
-###all
-`__::all(collection, iterator)`
+### all
+
+```php
+__::all(collection, iterator)
+```
 
 Returns true if all values in the collection pass the truth test (**iterator**).
 
@@ -131,8 +157,11 @@ __::all([1, 2, 3, 4], function($num) { return $num < 5; });
 // true
 ```
 
-###any
-`__::any(collection, iterator)`
+### any
+
+```php
+__::any(collection, iterator)
+```
 
 Returns true if any values in the collection pass the truth test (**iterator**).
 
@@ -143,8 +172,12 @@ __::any([1, 2, 3, 4], function($num) { return $num === 5; });
 // false
 ```
 
-###includ
-`__::includ(collection, value)` _Alias: [contians](#contains)_
+### includ
+_Alias: [contians](#contains)_
+
+```php
+__::includ(collection, value)
+```
 
 Returns true if value is found in the collection using === to test equality. This function is called 'include' in Underscore.js, but was renamed to 'includ' in Underscore.php because 'include' is a reserved keyword in PHP.
 
@@ -153,8 +186,11 @@ __::includ([1, 2, 3], 3);
 // true
 ```
 
-###invoke
-`__::invoke(collection, functionName)`
+### invoke
+
+```php
+__::invoke(collection, functionName)
+```
 
 Returns a copy of the collection after running functionName across all elements.
 
@@ -163,8 +199,11 @@ __::invoke([' foo', ' bar '], 'trim');
 // ['foo', 'bar']
 ```
 
-###pluck
-`__::pluck(collection, propertyName)`
+### pluck
+
+```php
+__::pluck(collection, propertyName)
+```
 
 Extract an array of property values
 
@@ -178,7 +217,7 @@ __::pluck($stooges, 'name');
 // ['moe', 'larry', 'curly']
 ```
 
-###max
+### max
 `__::max(collection, [iterator])`
 
 Returns the maximum value from the collection. If passed an iterator, max will return max value returned by the iterator. Unlike Underscore.js, context is passed using PHP's `use` statement.
@@ -193,8 +232,11 @@ __::max($stooges, function($stooge) { return $stooge['age']; });
 // ['name'=>'curly', 'age'=>60]
 ```
 
-###min
-`__::min(collection, [iterator])`
+### min
+
+```php
+__::min(collection, [iterator])
+```
 
 Returns the minimum value from the collection. If passed an iterator, min will return min value returned by the iterator. Unlike Underscore.js, context is passed using PHP's `use` statement.
 
@@ -207,8 +249,11 @@ $stooges = array(
 __::min($stooges, function($stooge) { return $stooge['age']; });
 // array('name'=>'moe', 'age'=>40)```
 
-###groupBy
-`__::groupBy(collection, iterator)`
+### groupBy
+
+```php
+__::groupBy(collection, iterator)
+```
 
 Group values by their return value when passed through the iterator. If iterator is a string, the result will be grouped by that property.
 
@@ -232,7 +277,11 @@ __::groupBy($values, 'grp');
 //);
 ```
 
-**sortBy** `__::sortBy(collection, iterator)`
+### sortBy
+
+```php
+__::sortBy(collection, iterator)
+```
 
 Returns an array sorted in ascending order based on the iterator results. If passed an iterator, min will return min value returned by the iterator. Unlike Underscore.js, context is passed using PHP's `use` statement.
 
@@ -241,104 +290,188 @@ __::sortBy([1, 2, 3], function($n) { return -$n;});
 // [3, 2, 1]
 ```
 
-**sortedIndex** `__::sortedIndex(collection, value, [iterator])`
+### sortedIndex
+
+```php
+__::sortedIndex(collection, value, [iterator])
+```
 
 Returns the index at which the value should be inserted into the sorted collection.
 
-```php__::sortedIndex(array(10, 20, 30, 40), 35); // 3```
+```php
+__::sortedIndex(array(10, 20, 30, 40), 35); // 3
+```
 
-**shuffle** `__::shuffle(collection)`
+### shuffle
+
+```php
+__::shuffle(collection)
+```
 
 Returns a shuffled copy of the collection.
 
-```php__::shuffle(array(10, 20, 30, 40)); // 30, 20, 40, 10```
+```php
+__::shuffle(array(10, 20, 30, 40)); // 30, 20, 40, 10
+```
 
-**toArray** `__::toArray(collection)`
+### toArray
+
+```php
+__::toArray(collection)
+```
 
 Converts the collection into an array.
 
-```php$stooge = new StdClass;
+```php
+$stooge = new StdClass;
 $stooge->name = 'moe';
 $stooge->age = 40;
-__::toArray($stooge); // array('name'=>'moe', 'age'=>40)```
+__::toArray($stooge);
+// array('name'=>'moe', 'age'=>40)
+```
 
-**size** `__::size(collection)`
+### size
+
+```php
+__::size(collection)
+```
 
 Returns the number of values in the collection.
 
-```php$stooge = new StdClass;
+```php
+$stooge = new StdClass;
 $stooge->name = 'moe';
 $stooge->age = 40;
-__::size($stooge); // 2```
+__::size($stooge); // 2
+```
 
 ## Arrays
 
-**first** `__::first(array, [n])` <span class="alias">Alias: **head**</span>
+### first
+_Alias: [head](#head)_
+
+```php
+__::first(array, [n])
+```
 
 Get the first element of an array. Passing n returns the first n elements.
 
-```php__::first(array(5, 4, 3, 2, 1)); // 5
-__::first(array(5, 4, 3, 2, 1), 3); // array(5, 4, 3)```
+```php
+__::first(array(5, 4, 3, 2, 1)); // 5
+__::first(array(5, 4, 3, 2, 1), 3); // array(5, 4, 3)
+```
 
-**initial** `__::initial(array, [n])`
+### initial
+
+```php
+__::initial(array, [n])
+```
 
 Get everything but the last array element. Passing n excludes the last n elements.
 
-```php__::initial(array(5, 4, 3, 2, 1)); // array(5, 4, 3, 2)
-__::initial(array(5, 4, 3, 2, 1), 3); // array(5, 4)```
+```php
+__::initial(array(5, 4, 3, 2, 1)); // array(5, 4, 3, 2)
+__::initial(array(5, 4, 3, 2, 1), 3); // array(5, 4)
+```
 
-**rest** `__::rest(array, [index])` <span class="alias">Alias: **tail**</span>
+### rest
+_Alias: [tail](#tail)_
+
+```php
+__::rest(array, [index])
+```
 
 Get the rest of the array elements. Passing an index returns from that index onward.
 
-```php__::rest(array(5, 4, 3, 2, 1)); // array(4, 3, 2, 1)```
+```php
+__::rest(array(5, 4, 3, 2, 1)); // array(4, 3, 2, 1)
+```
 
-**last** `__::last(array, [n])`
+### last
+
+```php
+__::last(array, [n])
+```
 
 Get the last element of an array. Passing n returns the last n elements.
 
-```php__::last(array(5, 4, 3, 2, 1)); // 1
-__::last(array(5, 4, 3, 2, 1), 2); // array(2, 1)```
+```php
+__::last(array(5, 4, 3, 2, 1)); // 1
+__::last(array(5, 4, 3, 2, 1), 2); // array(2, 1)
+```
 
-**compact** `__::compact(array)`
+### compact
+
+```php
+__::compact(array)
+```
 
 Returns a copy of the array with falsy values removed
 
-```php__::compact(array(false, true, 'a', 0, 1, '')); // array(true, 'a', 1)```
+```php
+__::compact(array(false, true, 'a', 0, 1, '')); // array(true, 'a', 1)
+```
 
-**flatten** `__::flatten(array, [shallow])`
+### flatten
+
+```php
+__::flatten(array, [shallow])
+```
 
 Flattens a multidimensional array. If you pass shallow, the array will only be flattened a single level.
 
-```php__::flatten(array(1, array(2), array(3, array(array(array(4))))));
+```php
+__::flatten(array(1, array(2), array(3, array(array(array(4))))));
 // array(1, 2, 3, 4)
-
 __::flatten(array(1, array(2), array(3, array(array(array(4))))), true);
 // array(1, 2, 3, array(array(4)))
 ```
 
-**without** `__::without(array, [*values])`
+### without
+
+```php
+__::without(array, [*values])
+```
 
 Returns a copy of the array with all instances of **values** removed. === is used for equality testing. Keys are maintained.
 
-```php__::without(array(5, 4, 3, 2, 1), 3, 2); // array(5, 4, 4=>1)```
+```php
+__::without(array(5, 4, 3, 2, 1), 3, 2); // array(5, 4, 4=>1)
+```
 
-**uniq** `__::uniq(array, [isSorted [, iterator]])` <span class="alias">Alias: **unique**</span>
+### uniq
+_Alias: [unique](#unique)_
+
+```php
+__::uniq(array, [isSorted [iterator]])
+```
 
 Returns a copy of the array containing no duplicate values. Unlike Underscore.js, passing isSorted does not currently affect the performance of `uniq`. You can optionally compute uniqueness by passing an iterator function.
 
-```php__::uniq(array(2, 2, 4, 4, 4, 1, 1, 1)); // array(2, 4, 1)```
+```php
+__::uniq(array(2, 2, 4, 4, 4, 1, 1, 1)); // array(2, 4, 1)
+```
 
-**union** `__::union(*arrays)`
+## union
+
+```php
+__::union(*arrays)
+```
 
 Returns an array containing the unique items in one or more of the arrays.
 
-```php$arr1 = array(1, 2, 3);
+```php
+$arr1 = array(1, 2, 3);
 $arr2 = array(101, 2, 1, 10);
 $arr3 = array(2, 1);
-__::union($arr1, $arr2, $arr3); // array(1, 2, 3, 101, 10)```
+__::union($arr1, $arr2, $arr3); // array(1, 2, 3, 101, 10)
+```
 
-**intersection** `__::intersection(*arrays)`
+### intersection
+
+```php
+__::intersection(*arrays)
+```
 
 Returns an array containing the intersection of all the arrays. Each value in the resulting array exists in all arrays.
 
@@ -350,7 +483,11 @@ __::intersection($arr1, $arr2, $arr3);
 // array(2, 3)
 ```
 
-**difference** `__::difference(array, *others)`
+### difference
+
+```php
+__::difference(array, *others)
+```
 
 Returns an array containing the items existing in one array, but not the other.
 
@@ -359,8 +496,11 @@ __::difference(array(1, 2, 3, 4, 5), array(5, 2, 10));
 // array(1, 3, 4)
 ```
 
-**zip**
-`__::zip(*arrays)`
+### zip
+
+```php
+__::zip(*arrays)
+```
 
 Merges arrays
 
@@ -376,8 +516,11 @@ __::zip($names, $ages, $leaders);
 // )
 ```
 
-**indexOf**
-`__::indexOf(array, value)`
+### indexOf
+
+```php
+__::indexOf(array, value)
+```
 
 Returns the index of the first match. Returns -1 if no match is found. Unlike Underscore.js, Underscore.php does not take a second isSorted parameter.
 
@@ -386,8 +529,11 @@ __::indexOf(array(1, 2, 3, 2, 2), 2);
 // 1
 ```
 
-**lastIndexOf**
-`__::lastIndexOf(array, value)`
+### lastIndexOf
+
+```php
+__::lastIndexOf(array, value)
+```
 
 Returns the index of the last match. Returns -1 if no match is found.
 
@@ -396,7 +542,11 @@ __::lastIndexOf(array(1, 2, 3, 2, 2), 2);
 // 4
 ```
 
-**range** `__::range([start], stop, [step])`
+### range
+
+```php
+__::range([start], stop, [step])
+```
 
 Returns an array of integers from **start** to **stop** (exclusive) by **step**. Defaults: **start**=0, **step**=1.
 
@@ -456,7 +606,11 @@ $func();
 // 'x'
 ```
 
-### wrap `__::wrap(function, wrapper)`
+### wrap
+
+```php
+__::wrap(function, wrapper)
+```
 
 Wraps the **function** inside the **wrapper** function, passing it as the first argument. Lets the **wrapper** execute code before and/or after the **function** runs.
 
@@ -469,7 +623,11 @@ $hi();
 // 'before, hello: moe, after'
 ```
 
-### compose  `__::compose(*functions)`
+### compose
+
+```php
+__::compose(*functions)
+```
 
 Returns the composition of the **functions**, where the return value is passed to the following function.
 
@@ -483,7 +641,11 @@ $welcome('moe');
 
 ## Objects
 
-### keys `__::keys(object)`
+### keys
+
+```php
+__::keys(object)
+```
 
 Get the keys
 
@@ -492,7 +654,11 @@ __::keys((object) array('name'=>'moe', 'age'=>40));
 // array('name', 'age')
 ```
 
-### values `__::values(object)`
+### values
+
+```php
+__::values(object)
+```
 
 Get the values
 
@@ -501,7 +667,12 @@ __::values((object) array('name'=>'moe', 'age'=>40));
 // array('moe', 40)
 ```
 
-### functions `__::functions(object)` _Alias: [methods](#methods)_
+### functions
+_Alias: [methods](#methods)_
+
+```php
+__::functions(object)
+```
 
 Get the names of functions available to the object
 
@@ -515,7 +686,11 @@ __::functions($stooge);
 // array('getName', 'getAge')
 ```
 
-### extend `__::extend(destination, *sources)`
+### extend
+
+```php
+__::extend(destination, *sources)
+```
 
 Copy all properties from the **source** objects into the **destination** object. Copying happens in order, so rightmost sources have override power.
 
@@ -523,7 +698,11 @@ Copy all properties from the **source** objects into the **destination** object.
 __::extend((object) array('name'=>'moe'), (object) array('age'=>50));
 // (object) array('name'=>'moe', 'age'=>50)```
 
-### defaults `__::defaults(object, *defaults)`
+### defaults
+
+```php
+__::defaults(object, *defaults)
+```
 
 Returns the object with any missing values filled in using the defaults. Once a default is applied for a given property, it will not be overridden by following defaults.
 
@@ -534,7 +713,11 @@ __::defaults($food, $defaults);
 // (object) array('dairy'=>'cheese', 'meat'=>'bacon');
 ```
 
-### clon `__::clon(object)`
+### clon
+
+```php
+__::clon(object)
+```
 
 Returns a shallow copy of the object. This function is called 'clone' in Underscore.js, but was renamed to 'clon' in Underscore.php because 'clone' is a reserved keyword in PHP.
 
@@ -543,7 +726,11 @@ $stooge = (object) array('name'=>'moe');
 __::clon($stooge); // (object) array('name'=>'moe');
 ```
 
-## tap `__::tap(object, interceptor)`
+## tap
+
+```php
+__::tap(object, interceptor)
+```
 
 Invokes the **interceptor** on the **object**, then returns the object. Useful for performing intermediary operations on the object.
 
@@ -555,7 +742,11 @@ __::chain(array(1, 2, 3))->max()
 // 6
 ```
 
-### has `__::has(object, key)`
+### has
+
+```php
+__::has(object, key)
+```
 
 Does the object have this key?
 
@@ -564,7 +755,11 @@ __::has((object) array('a'=>1, 'b'=>2, 'c'=>3), 'b');
 // true
 ```
 
-### isEqual `__::isEqual(object, other)`
+### isEqual
+
+```php
+__::isEqual(object, other)
+```
 
 Are these items equal? Uses === equality testing. Objects tested using values.
 
@@ -576,7 +771,11 @@ __::isEqual($stooge, $clon);
 // true
 ```
 
-### isEmpty `__::isEmpty(object)`
+### isEmpty
+
+```php
+__::isEmpty(object)
+```
 
 Returns true if the **object** contains no values.
 
@@ -590,7 +789,11 @@ __::isEmpty((object) array());
 // true
 ```
 
-### isObject `__::isObject(object)`
+### isObject
+
+```php
+__::isObject(object)
+```
 
 Returns true if passed an object.
 
@@ -601,7 +804,11 @@ __::isObject(new StdClass);
 // true
 ```
 
-### isArray `__::isArray(object)`
+### isArray
+
+```php
+__::isArray(object)
+```
 
 Returns true if passed an array.
 
@@ -612,7 +819,11 @@ __::isArray((object) array(1, 2));
 // false
 ```
 
-### isFunction `__::isFunction(object)`
+### isFunction
+
+```php
+__::isFunction(object)
+```
 
 Returns true if passed a function.
 
@@ -623,7 +834,11 @@ __::isFunction('trim');
 // false
 ```
 
-### isString `__::isString(object)`
+### isString
+
+```php
+__::isString(object)
+```
 
 Returns true if passed a string.
 
@@ -634,7 +849,11 @@ __::isString('');
 // true
 ```
 
-### isNumber `__::isNumber(object)`
+### isNumber
+
+```php
+__::isNumber(object)
+```
 
 Returns true if passed a number.
 
@@ -644,7 +863,11 @@ __::isNumber(2.5); // true
 __::isNumber('5'); // false
 ```
 
-### isBoolean `__::isBoolean(object)`
+### isBoolean
+
+```php
+__::isBoolean(object)
+```
 
 Returns true if passed a boolean.
 
@@ -654,7 +877,11 @@ __::isBoolean(true); // true
 __::isBoolean(0); // false
 ```
 
-### isDate `__::isDate(object)`
+### isDate
+
+```php
+__::isDate(object)
+```
 
 Returns true if passed a DateTime object
 
@@ -664,7 +891,11 @@ __::isDate('2011-06-09 01:02:03'); // false
 __::isDate(new DateTime); // true
 ```
 
-### isNaN `__::isNaN(object)`
+### isNaN
+
+```php
+__::isNaN(object)
+```
 
 Returns true if value is NaN
 
@@ -673,7 +904,11 @@ __::isNaN(null); // false
 __::isNaN(acos(8)); // true
 ```
 
-### isNull `__::isNull(object)`
+### isNull
+
+```php
+__::isNull(object)
+```
 
 Returns true if value is null
 
@@ -684,7 +919,11 @@ __::isNull(false); // false
 
 ## Utility
 
-### identity `__::identity(value)`
+### identity
+
+```php
+__::identity(value)
+```
 
 Returns the same value passed as the argument
 
@@ -693,7 +932,11 @@ $moe = array('name'=>'moe');
 $moe === __::identity($moe); // true
 ```
 
-### times `__::times(n, iterator)`
+### times
+
+```php
+__::times(n, iterator)
+```
 
 Invokes the **iterator** function **n** times.
 
@@ -701,7 +944,11 @@ Invokes the **iterator** function **n** times.
 __::times(3, function() { echo 'a'; }); // 'aaa'
 ```
 
-### mixin `__::mixin(array)`
+### mixin
+
+```php
+__::mixin(array)
+```
 
 Extend Underscore.php with your own functions.
 
@@ -714,7 +961,11 @@ __::capitalize('moe'); // 'Moe'
 __::yell('moe');       // 'MOE'
 ```
 
-### uniqueId `__::uniqueId([prefix])`
+### uniqueId
+
+```php
+__::uniqueId([prefix])
+```
 
 Generate a globally unique id.
 
@@ -724,7 +975,11 @@ __::uniqueId('stooge_'); // 'stooge_1'
 __::uniqueId(); // 2
 ```
 
-### escape `__::escape(html)`
+### escape
+
+```php
+__::escape(html)
+```
 
 Escapes the string.
 
@@ -732,7 +987,11 @@ Escapes the string.
 __::escape('Curly, Larry & Moe'); // 'Curly, Larry &amp; Moe'
 ```
 
-### template `__::template(templateString, [context])`
+### template
+
+```php
+__::template(templateString, [context])
+```
 
 Compile templates into functions that can be evaluated for rendering. Templates can interpolate variables and execute arbitrary PHP code.
 
@@ -790,7 +1049,9 @@ $result = __::chain($numbers)->select(function($n) { return $n < 5; })
 
 ### value
 
-`__(obj)->value()`
+```php
+__(obj)->value()
+```
 
 Extracts the value of a wrapped object.
 
