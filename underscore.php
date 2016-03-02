@@ -540,7 +540,11 @@ class Underscore {
 
     $results = array();
     foreach($collection as $k=>$item) {
-      $results[$k] = $iterator($item);
+      if (__::isFunction($iterator)) {
+        $results[$k] = $iterator($item);
+      } elseif (__::isString($iterator)) {
+        $results[$k] = is_array($item) ? $item[$iterator] : $item->{$iterator};
+      }
     }
     asort($results);
     foreach($results as $k=>$v) {
