@@ -18,7 +18,7 @@ In addition to porting Underscore's functionality, Underscore.php includes match
 ~~bind~~, ~~bindAll~~ [memoize](#memoize), ~~delay~~, ~~defer~~, [throttle](#throttle), ~~debounce~~, [once](#once), [after](#after), [wrap](#wrap), [compose](#compose)
 
 ### Objects
-[keys](#keys), [values](#values), [functions](#functions), [extend](#extend), [defaults](#defaults), [clon](#clon), [tap](#tap), [has](#has), [isEqual](#isEqual), [isEmpty](#isEmpty), ~~isElement~~, [isObject](#isObject), [isArray](#isArray), <span class="fade">isArguments</span>, [isFunction](#isFunction), [isString](#isString), [isNumber](#isNumber), [isBoolean](#isBoolean), [isDate](#isDate), ~~isRegExp~~, [isNaN](#isNaN), [isNull](#isNull), ~~isUndefined~~
+[keys](#keys), [values](#values), [functions](#functions), [extend](#extend), [defaults](#defaults), [clon](#clon), [tap](#tap), [has](#has), [isEqual](#isEqual), [isEmpty](#isEmpty), ~~isElement~~, [isObject](#isObject), [isArray](#isArray), ~~isArguments~~, [isFunction](#isFunction), [isString](#isString), [isNumber](#isNumber), [isBoolean](#isBoolean), [isDate](#isDate), ~~isRegExp~~, [isNaN](#isNaN), [isNull](#isNull), ~~isUndefined~~
 
 ### Utility
 ~~noConflict~~, [identity](#identity), [times](#times), [mixin](#mixin), [uniqueId](#uniqueId), [escape](#escape), [template](#template)
