@@ -533,17 +533,16 @@ class Underscore {
     return self::_wrap($collection[$first_key]);
   }
 
-
   // Sort the collection by return values from the iterator
-  public function sortBy($collection=null, $iterator=null) {
-    list($collection, $iterator) = self::_wrapArgs(func_get_args(), 2);
+  public function sortBy($collection=null, $predicate=null) {
+    list($collection, $predicate) = self::_wrapArgs(func_get_args(), 2);
 
     $results = array();
     foreach($collection as $k=>$item) {
-      if (__::isFunction($iterator)) {
-        $results[$k] = $iterator($item);
-      } elseif (__::isString($iterator)) {
-        $results[$k] = is_array($item) ? $item[$iterator] : $item->{$iterator};
+      if (__::isFunction($predicate)) {
+        $results[$k] = $predicate($item);
+      } else {
+        $results[$k] = $this->getVal($item, $predicate);
       }
     }
     asort($results);
@@ -1097,6 +1096,10 @@ class Underscore {
     return self::$_instance;
   }
 
+  private function getVal($item, $key) {
+    if (!__::isArray($item) && !__::isObject($item)) return null;
+    return __::isArray($item) ? $item[$key] : $item->{$key};
+  }
 
   // All methods should wrap their returns within _wrap
   // because this function understands both OO-style and functional calls
