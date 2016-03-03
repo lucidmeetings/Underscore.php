@@ -2,6 +2,12 @@
 
 class UnderscoreCollectionsTest extends PHPUnit_Framework_TestCase {
 
+  public $assoc  = [
+    ["name" => "joe", "job" => "plumber"],
+    ["name" => "fred", "job" => "plumber"],
+    ["name" => "john", "job" => "barber"],
+  ];
+
   public function testEach() {
     // from js
     $test =& $this;
@@ -87,6 +93,13 @@ class UnderscoreCollectionsTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(2, __::find(array(1,2,3), function($num) { return $num * 2 === 4; }), 'found the first "2" and broke the loop');
 
     // extra
+    $this->assertEquals(__::find($this->assoc, ['name' => 'fred'])['name'], 'fred');
+    $this->assertEquals(__::find($this->assoc, ['name' => 'fred', 'job' => 'plumber'])['name'], 'fred');
+
+    $obj = (object) $this->assoc;
+    $this->assertEquals(__::find($obj, ['name' => 'fred'])['name'], 'fred');
+    $this->assertEquals(__::find($obj, ['name' => 'fred', 'job' => 'plumber'])['name'], 'fred');
+
     $iterator = function($n) { return $n % 2 === 0; };
     $this->assertEquals(2, __::find(array(1, 2, 3, 4, 5, 6), $iterator));
     $this->assertEquals(false, __::find(array(1, 3, 5), $iterator));
@@ -112,7 +125,13 @@ class UnderscoreCollectionsTest extends PHPUnit_Framework_TestCase {
     $iterator = function($num) { return $num % 2 !== 0; };
     $this->assertEquals(__::filter(array(1,3,5), $iterator), __::select(array(1,3,5), $iterator), 'alias works');
 
-    // docs
+    $this->assertEquals(__::filter($this->assoc, ['job' => "barber"])[0]['name'], 'john');
+    $this->assertEquals(__::filter($this->assoc, ['job' => "plumber", 'name' => 'fred'])[0]['name'], 'fred');
+
+    $obj = (object) $this->assoc;
+    $this->assertEquals(__::filter($obj, ['job' => "barber"])[0]['name'], 'john');
+    $this->assertEquals(__::filter($obj, ['job' => "plumber", 'name' => 'fred'])[0]['name'], 'fred');
+
     $this->assertEquals(array(2,4), __::filter(array(1, 2, 3, 4), function($num) { return $num % 2 === 0; }));
   }
 

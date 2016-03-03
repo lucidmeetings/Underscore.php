@@ -452,7 +452,7 @@ Returns a copy of the array containing no duplicate values. Unlike Underscore.js
 __::uniq(array(2, 2, 4, 4, 4, 1, 1, 1)); // array(2, 4, 1)
 ```
 
-## union
+### union
 
 ```php
 __::union(*arrays)

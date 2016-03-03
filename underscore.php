@@ -200,11 +200,13 @@ class Underscore {
     list($collection, $iterator) = self::_wrapArgs(func_get_args(), 2);
 
     $collection = self::_collection($collection);
+    $iterator = __::isArray($iterator) ? $this->matchFunct($iterator) : $iterator;
 
-    $return = array();
+    $return = [];
     foreach($collection as $val) {
-      if(call_user_func($iterator, $val)) $return[] = $val;
+      if (call_user_func($iterator, $val)) $return[] = $val;
     }
+
     return self::_wrap($return);
   }
 
@@ -229,10 +231,11 @@ class Underscore {
   public function find($collection=null, $iterator=null) {
     list($collection, $iterator) = self::_wrapArgs(func_get_args(), 2);
 
+    $iterator = __::isArray($iterator) ? $this->matchFunct($iterator) : $iterator;
     $collection = self::_collection($collection);
 
     foreach($collection as $val) {
-      if(call_user_func($iterator, $val)) return $val;
+      if (call_user_func($iterator, $val)) return $val;
     }
     return self::_wrap(false);
   }
@@ -1128,6 +1131,23 @@ class Underscore {
     return array_pad($filled_args, $num_args, null);
   }
 
+  private function matchFunct($keyVals) {
+    return function ($item) use ($keyVals) {
+      foreach($keyVals as $key => $val) {
+        if ($this->getVal($item, $key) !== $val) return false;
+      }
+      return true;
+    };
+  }
+
+  private function getVal($item, $key) {
+    if (__::isObject($item)) {
+      return property_exists($item, $key) ? $item->{$key} : null;
+    } elseif (__::isArray($item)) {
+      return array_key_exists($key, $item) ? $item[$key] : null;
+    }
+    return null;
+  }
 
   // Get a collection in a way that supports strings
   private function _collection($collection) {
