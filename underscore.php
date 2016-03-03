@@ -123,9 +123,8 @@ class Underscore {
 
     $return = array();
     foreach($collection as $item) {
-      foreach($item as $k=>$v) {
-        if($k === $key) $return[] = $v;
-      }
+      $val = $this->getVal($item, $key);
+      if ($val) array_push($return, $val);
     }
     return self::_wrap($return);
   }
