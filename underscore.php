@@ -367,6 +367,7 @@ class Underscore {
   public function unique($collection=null, $is_sorted=null, $iterator=null) { return self::uniq($collection, $is_sorted, $iterator); }
   public function uniq($collection=null, $is_sorted=null, $iterator=null) {
     list($collection, $is_sorted, $iterator) = self::_wrapArgs(func_get_args(), 3);
+
     $collection = self::_collection($collection);
 
     $return = array();
@@ -1144,8 +1145,15 @@ class Underscore {
   }
 
   private function getVal($item, $key) {
-    if (__::isObject($item)) {
+    if (__::isArray($key)) {
+      $assoc = [];
+      foreach($key as $k) {
+        $assoc[$k] = $this->getVal($item, $k);
+      }
+      return $assoc;
+    }
 
+    if (__::isObject($item)) {
       try {
         return $item->{$key};
       } catch (Exception $e) {

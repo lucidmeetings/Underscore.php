@@ -339,6 +339,14 @@ class UnderscoreCollectionsTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array('bar'), __::pluck($stooges, 'foo'));
     $this->assertEquals(array('bar'), __($stooges)->pluck('foo'), 'works with OO-style call');
 
+    $expected = [
+      ['name'=>'moe',   'age'=> 40],
+      ['name'=>'larry', 'age'=> 50],
+      ['name'=>'curly', 'age'=> 60]
+    ];
+
+    $this->assertEquals($expected, __::pluck($stooges, ['name', 'age']));
+
     // docs
     $stooges = array(
       array('name'=>'moe', 'age'=>40),
