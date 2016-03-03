@@ -326,6 +326,7 @@ class UnderscoreCollectionsTest extends PHPUnit_Framework_TestCase {
 
     $obj = (object) $stooges;
     $this->assertEquals(array('moe', 'larry', 'curly'), __::pluck($obj, 'name'));
+    $this->assertEquals([], __::pluck($obj, 'notHere'));
 
     // extra: object
     $stooges_obj = new StdClass;

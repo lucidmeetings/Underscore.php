@@ -1141,7 +1141,13 @@ class Underscore {
 
   private function getVal($item, $key) {
     if (__::isObject($item)) {
-      return property_exists($item, $key) ? $item->{$key} : null;
+
+      try {
+        return $item->{$key};
+      } catch (Exception $e) {
+        return null;
+      }
+
     } elseif (__::isArray($item)) {
       return array_key_exists($key, $item) ? $item[$key] : null;
     }
