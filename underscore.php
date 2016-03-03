@@ -367,16 +367,20 @@ class Underscore {
   public function unique($collection=null, $is_sorted=null, $iterator=null) { return self::uniq($collection, $is_sorted, $iterator); }
   public function uniq($collection=null, $is_sorted=null, $iterator=null) {
     list($collection, $is_sorted, $iterator) = self::_wrapArgs(func_get_args(), 3);
-
     $collection = self::_collection($collection);
 
     $return = array();
-    if(count($collection) === 0) return self::_wrap($return);
+    if (count($collection) === 0) return self::_wrap($return);
 
     $calculated = array();
     foreach($collection as $item) {
-      $val = (!is_null($iterator)) ? $iterator($item) : $item;
-      if(is_bool(array_search($val, $calculated, true))) {
+
+      if (is_null($iterator))
+        $val = $item;
+      else
+        $val = $this->isFunction($iterator) ? $iterator($item) : $this->getVal($item, $iterator);
+
+      if (is_bool(array_search($val, $calculated, true))) {
         $calculated[] = $val;
         $return[] = $item;
       }

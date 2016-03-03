@@ -176,6 +176,7 @@ class UnderscoreArraysTest extends PHPUnit_Framework_TestCase {
     );
     $iterator = function($value) { return $value->name; };
     $this->assertEquals(array('moe', 'curly', 'larry'), __::map(__::uniq($list, false, $iterator), $iterator), 'can find the unique values of an array using a custom iterator');
+    $this->assertEquals(array('moe', 'curly', 'larry'), __::pluck(__::uniq($list, false, 'name'), 'name'), 'can find the unique values by passing a key');
 
     $iterator = function($value) { return $value + 1; };
     $list = array(1, 2, 2, 3, 4, 4);
