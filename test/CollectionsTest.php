@@ -1,5 +1,12 @@
 <?php
 
+class Foo {
+  public $deleted = false;
+  public $name = null;
+  public function delete() { $this->deleted = true; }
+  public function name($name) { $this->name = $name; }
+}
+
 class UnderscoreCollectionsTest extends PHPUnit_Framework_TestCase {
 
   public $assoc  = [
@@ -140,6 +147,8 @@ class UnderscoreCollectionsTest extends PHPUnit_Framework_TestCase {
     $odds = __::reject(array(1,2,3,4,5,6), function($num) { return $num % 2 === 0; });
     $this->assertEquals(array(1, 3, 5), $odds, 'rejected each even number');
 
+    $this->assertEquals([3, 2], __::reject([3, null, 2], 'is_null'));
+
     // extra
     $evens = __(array(1,2,3,4,5,6))->reject(function($num) { return $num % 2 !== 0; });
     $this->assertEquals(array(2,4,6), $evens, 'works with OO-style calls');
@@ -239,6 +248,13 @@ class UnderscoreCollectionsTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array('foo','bar'), __::invoke($list, 'trim'), 'trim applied on array');
     $this->assertEquals((object) array('foo','bar'), __::invoke((object) $list, 'trim'), 'trim applied on object');
     $this->assertEquals(array('foo','bar'), __($list)->invoke('trim'), 'works with OO-style call');
+
+
+    $obj = new Foo;
+    __::invoke([$obj], 'delete');
+    __::invoke([$obj], 'name', 'david');
+    $this->assertEquals($obj->deleted, true);
+    $this->assertEquals($obj->name, 'david');
 
     // docs
     $this->assertEquals(array('foo', 'bar'), __::invoke(array(' foo', ' bar '), 'trim'));

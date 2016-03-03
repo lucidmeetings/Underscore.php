@@ -152,9 +152,18 @@ class Underscore {
     // If passed an array or string, return an array
     // If passed an object, return an object
     $is_obj = is_object($collection);
-    $result = (empty($arguments)) ? array_map($function_name, (array) $collection) : array_map($function_name, (array) $collection, $arguments);
-    if($is_obj) $result = (object) $result;
+    $tester = $is_obj ? $collection : $__->first($collection);
 
+    if (method_exists($tester, $function_name)) {
+      $result = $__->map($collection, function ($item) use ($function_name, $arguments){
+        call_user_func_array([&$item, $function_name], $arguments);
+        return $item;
+      });
+    } else {
+      $result = (empty($arguments)) ? array_map($function_name, (array) $collection) : array_map($function_name, (array) $collection, $arguments);
+    }
+
+    if ($is_obj) $result = (object) $result;
     return self::_wrap($result);
   }
 
@@ -199,7 +208,7 @@ class Underscore {
     list($collection, $iterator) = self::_wrapArgs(func_get_args(), 2);
 
     $collection = self::_collection($collection);
-    $iterator = __::isArray($iterator) ? $this->matchFunct($iterator) : $iterator;
+    $iterator = is_array($iterator) ? $this->matchFunct($iterator) : $iterator;
 
     $return = [];
     foreach($collection as $val) {
@@ -230,7 +239,7 @@ class Underscore {
   public function find($collection=null, $iterator=null) {
     list($collection, $iterator) = self::_wrapArgs(func_get_args(), 2);
 
-    $iterator = __::isArray($iterator) ? $this->matchFunct($iterator) : $iterator;
+    $iterator = is_array($iterator) ? $this->matchFunct($iterator) : $iterator;
     $collection = self::_collection($collection);
 
     foreach($collection as $val) {
@@ -543,14 +552,14 @@ class Underscore {
   // Sort the collection by return values from the iterator
   public function sortBy($collection=null, $predicate=null) {
     list($collection, $predicate) = self::_wrapArgs(func_get_args(), 2);
-
-    if (__::isFunction($predicate)) {
+    $__ = new self;
+    if ($__->isFunction($predicate)) {
       $results = [];
       foreach($collection as $k => $item) {
         $results[$k] = $predicate($item);
       }
     } else {
-      $results = __::pluck($collection, $predicate);
+      $results = $__->pluck($collection, $predicate);
     }
 
     asort($results);
@@ -1145,7 +1154,8 @@ class Underscore {
   }
 
   private function getVal($item, $key) {
-    if (__::isArray($key)) {
+    $__ = new self;
+    if ($__->isArray($key)) {
       $assoc = [];
       foreach($key as $k) {
         $assoc[$k] = $this->getVal($item, $k);
@@ -1153,14 +1163,14 @@ class Underscore {
       return $assoc;
     }
 
-    if (__::isObject($item)) {
+    if ($__->isObject($item)) {
       try {
         return $item->{$key};
       } catch (Exception $e) {
         return null;
       }
 
-    } elseif (__::isArray($item)) {
+    } elseif ($__->isArray($item)) {
       return array_key_exists($key, $item) ? $item[$key] : null;
     }
     return null;
