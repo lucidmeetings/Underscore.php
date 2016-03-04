@@ -246,9 +246,7 @@ class UnderscoreCollectionsTest extends PHPUnit_Framework_TestCase {
     // the sort example from js doesn't work here because sorting occurs in place in PHP
     $list = array(' foo', ' bar ');
     $this->assertEquals(array('foo','bar'), __::invoke($list, 'trim'), 'trim applied on array');
-    $this->assertEquals((object) array('foo','bar'), __::invoke((object) $list, 'trim'), 'trim applied on object');
     $this->assertEquals(array('foo','bar'), __($list)->invoke('trim'), 'works with OO-style call');
-
 
     $obj = new Foo;
     __::invoke([$obj], 'delete');

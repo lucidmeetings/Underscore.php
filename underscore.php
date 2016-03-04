@@ -147,14 +147,13 @@ class Underscore {
     $args = self::_wrapArgs(func_get_args(), 2);
     $__ = new self;
     list($collection, $function_name) = $__->first($args, 2);
+
+    $collection = self::_collection($collection);
     $arguments = $__->rest(func_get_args(), 2);
 
-    // If passed an array or string, return an array
-    // If passed an object, return an object
-    $is_obj = is_object($collection);
-    $tester = $is_obj ? $collection : $__->first($collection);
+    $tester = $__->first($collection);
 
-    if (method_exists($tester, $function_name)) {
+    if (is_object($tester) && is_callable($function_name, true, $tester)) {
       $result = $__->map($collection, function ($item) use ($function_name, $arguments){
         call_user_func_array([&$item, $function_name], $arguments);
         return $item;
@@ -163,7 +162,6 @@ class Underscore {
       $result = (empty($arguments)) ? array_map($function_name, (array) $collection) : array_map($function_name, (array) $collection, $arguments);
     }
 
-    if ($is_obj) $result = (object) $result;
     return self::_wrap($result);
   }
 
@@ -1154,8 +1152,7 @@ class Underscore {
   }
 
   private function getVal($item, $key) {
-    $__ = new self;
-    if ($__->isArray($key)) {
+    if (is_array($key)) {
       $assoc = [];
       foreach($key as $k) {
         $assoc[$k] = $this->getVal($item, $k);
@@ -1163,14 +1160,14 @@ class Underscore {
       return $assoc;
     }
 
-    if ($__->isObject($item)) {
+    if (is_object($item)) {
       try {
         return $item->{$key};
       } catch (Exception $e) {
         return null;
       }
 
-    } elseif ($__->isArray($item)) {
+    } elseif (is_array($item)) {
       return array_key_exists($key, $item) ? $item[$key] : null;
     }
     return null;
