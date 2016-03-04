@@ -151,15 +151,19 @@ class Underscore {
     $collection = self::_collection($collection);
     $arguments = $__->rest(func_get_args(), 2);
 
-    $tester = $__->first($collection);
-
-    if (is_object($tester) && is_callable($function_name, true, $tester)) {
-      $result = $__->map($collection, function ($item) use ($function_name, $arguments){
-        call_user_func_array([&$item, $function_name], $arguments);
-        return $item;
-      });
+    if (empty($collection)) {
+      $result = $collection;
     } else {
-      $result = (empty($arguments)) ? array_map($function_name, $collection) : array_map($function_name, $collection, $arguments);
+      $tester = $__->first($collection);
+
+      if (method_exists($tester, $function_name)) {
+        $result = $__->map($collection, function ($item) use ($function_name, $arguments){
+          call_user_func_array([&$item, $function_name], $arguments);
+          return $item;
+        });
+      } else {
+        $result = (empty($arguments)) ? array_map($function_name, $collection) : array_map($function_name, $collection, $arguments);
+      }
     }
 
     return self::_wrap($result);
