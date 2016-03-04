@@ -159,7 +159,7 @@ class Underscore {
         return $item;
       });
     } else {
-      $result = (empty($arguments)) ? array_map($function_name, (array) $collection) : array_map($function_name, (array) $collection, $arguments);
+      $result = (empty($arguments)) ? array_map($function_name, $collection) : array_map($function_name, $collection, $arguments);
     }
 
     return self::_wrap($result);
