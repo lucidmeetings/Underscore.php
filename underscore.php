@@ -247,7 +247,7 @@ class Underscore {
     foreach($collection as $val) {
       if (call_user_func($iterator, $val)) return $val;
     }
-    return self::_wrap(false);
+    return self::_wrap(null);
   }
 
 
