@@ -147,14 +147,25 @@ class Underscore {
     $args = self::_wrapArgs(func_get_args(), 2);
     $__ = new self;
     list($collection, $function_name) = $__->first($args, 2);
+
+    $collection = self::_collection($collection);
     $arguments = $__->rest(func_get_args(), 2);
-    
-    // If passed an array or string, return an array
-    // If passed an object, return an object
-    $is_obj = is_object($collection);
-    $result = (empty($arguments)) ? array_map($function_name, (array) $collection) : array_map($function_name, (array) $collection, $arguments);
-    if($is_obj) $result = (object) $result;
-    
+
+    if (empty($collection)) {
+      $result = $collection;
+    } else {
+      $tester = $__->first($collection);
+
+      if (method_exists($tester, $function_name)) {
+        $result = $__->map($collection, function ($item) use ($function_name, $arguments){
+          call_user_func_array([&$item, $function_name], $arguments);
+          return $item;
+        });
+      } else {
+        $result = (empty($arguments)) ? array_map($function_name, $collection) : array_map($function_name, $collection, $arguments);
+      }
+    }
+
     return self::_wrap($result);
   }
 
