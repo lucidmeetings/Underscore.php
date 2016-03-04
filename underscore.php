@@ -1149,7 +1149,7 @@ class Underscore {
   private function matchFunct($keyVals) {
     return function ($item) use ($keyVals) {
       foreach($keyVals as $key => $val) {
-        if ($this->getVal($item, $key) !== $val) return false;
+        if ($this->getVal($item, $key) != $val) return false;
       }
       return true;
     };
