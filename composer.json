@@ -1,12 +1,12 @@
 {
 	"version": "1.0.1",
-	"name": "dperrymorrow/underscore.php",
+	"name": "wikiHow/underscore.php",
 	"description": "a patch of http://brianhaveri.github.com/Underscore.php to make it work with PHP 5.5 in strict mode",
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "David Morrow",
-			"email": "dperrymorrow@gmail.com"
+			"email": "dave@wikihow.com"
 		}
 	],
 	"require": {
