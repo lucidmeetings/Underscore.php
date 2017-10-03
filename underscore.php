@@ -22,7 +22,7 @@ class __ {
       $obj =& $arguments[0];
       return $inst->clon($obj);
     }
-    return call_user_func_array([$inst, $name], $arguments);
+    return call_user_func_array(array($inst, $name), $arguments);
   }
 }
 
@@ -158,7 +158,7 @@ class Underscore {
 
       if (method_exists($tester, $function_name)) {
         $result = $__->map($collection, function ($item) use ($function_name, $arguments){
-          return call_user_func_array([$item, $function_name], $arguments);
+            return call_user_func_array(array($item, $function_name), $arguments);
         });
       } else {
         $result = (empty($arguments)) ? array_map($function_name, $collection) : array_map($function_name, $collection, $arguments);
@@ -211,7 +211,7 @@ class Underscore {
     $collection = self::_collection($collection);
     $iterator = is_array($iterator) ? $this->matchFunct($iterator) : $iterator;
 
-    $return = [];
+    $return = array();
     foreach($collection as $val) {
       if (call_user_func($iterator, $val)) $return[] = $val;
     }
@@ -555,7 +555,7 @@ class Underscore {
     list($collection, $predicate) = self::_wrapArgs(func_get_args(), 2);
     $__ = new self;
     if ($__->isFunction($predicate)) {
-      $results = [];
+        $results = array();
       foreach($collection as $k => $item) {
         $results[$k] = $predicate($item);
       }
@@ -1156,7 +1156,7 @@ class Underscore {
 
   private function getVal($item, $key) {
     if (is_array($key)) {
-      $assoc = [];
+        $assoc = array();
       foreach($key as $k) {
         $assoc[$k] = $this->getVal($item, $k);
       }
